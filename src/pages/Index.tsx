@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CalendarDays, Clock, Shield, Smartphone } from "lucide-react";
+import hospitalHero from "@/assets/hospital-hero.jpg";
 
 const features = [
   { icon: CalendarDays, title: "실시간 스케줄", desc: "의사별 실시간 진료 일정을 확인하세요" },
@@ -21,33 +22,47 @@ const Index = () => {
         <div className="absolute inset-0 gradient-hero opacity-95" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsl(199,89%,42%,0.15),_transparent_60%)]" />
         <div className="container relative mx-auto px-4 py-20 lg:py-32">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl"
-          >
-            <h1 className="mb-4 font-display text-4xl font-extrabold leading-tight text-primary-foreground lg:text-5xl">
-              쉽고 빠른<br />
-              <span className="text-[hsl(168,76%,55%)]">병원 예약 시스템</span>
-            </h1>
-            <p className="mb-8 text-lg text-primary-foreground/70">
-              담당 의사의 실시간 스케줄을 확인하고, 원하는 시간에 바로 예약하세요.
-              더 이상 전화 대기는 필요 없습니다.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link to="/booking">
-                <Button size="lg" className="gradient-accent text-accent-foreground font-bold shadow-primary">
-                  지금 예약하기
-                </Button>
-              </Link>
-              <Link to="/login">
-                <Button size="lg" variant="outline" className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10">
-                  로그인
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
+          <div className="flex flex-col items-center gap-10 lg:flex-row lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="max-w-2xl flex-1"
+            >
+              <h1 className="mb-4 font-display text-4xl font-extrabold leading-tight text-primary-foreground lg:text-5xl">
+                쉽고 빠른<br />
+                <span className="text-[hsl(168,76%,55%)]">병원 예약 시스템</span>
+              </h1>
+              <p className="mb-8 text-lg text-primary-foreground/70">
+                담당 의사의 실시간 스케줄을 확인하고, 원하는 시간에 바로 예약하세요.
+                더 이상 전화 대기는 필요 없습니다.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link to="/booking">
+                  <Button size="lg" className="gradient-accent text-accent-foreground font-bold shadow-primary">
+                    지금 예약하기
+                  </Button>
+                </Link>
+                <Link to="/login">
+                  <Button size="lg" className="bg-primary-foreground text-foreground font-bold hover:bg-primary-foreground/90">
+                    로그인
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="flex-1"
+            >
+              <img
+                src={hospitalHero}
+                alt="현대적인 병원 건물 외관"
+                className="w-full max-w-lg rounded-2xl shadow-lg mx-auto"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
