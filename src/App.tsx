@@ -12,6 +12,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import DoctorDashboard from "./pages/DoctorDashboard";
 import StaffDashboard from "./pages/StaffDashboard";
 import NotFound from "./pages/NotFound";
+import FloatingChat from "./components/FloatingChat";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/staff" element={<StaffDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <FloatingChat />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
