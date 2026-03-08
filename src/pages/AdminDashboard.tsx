@@ -2,6 +2,7 @@ import AdminSidebar from "@/components/admin/AdminSidebar";
 import StatsCards from "@/components/admin/StatsCards";
 import ScheduleTimeline from "@/components/admin/ScheduleTimeline";
 import AppointmentTable from "@/components/admin/AppointmentTable";
+import LoginLogsTable from "@/components/admin/LoginLogsTable";
 import { LayoutDashboard, Users, CalendarDays, Settings } from "lucide-react";
 
 const adminLinks = [
@@ -32,6 +33,11 @@ const AdminDashboard = () => {
           <div>
             <h2 className="mb-3 font-display text-lg font-bold text-foreground">예약 명단</h2>
             <AppointmentTable />
+          </div>
+
+          <div>
+            <h2 className="mb-3 font-display text-lg font-bold text-foreground">로그인 기록</h2>
+            <LoginLogsTable />
           </div>
         </div>
       </main>
