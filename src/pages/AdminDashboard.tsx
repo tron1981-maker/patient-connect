@@ -2,6 +2,7 @@ import AdminSidebar from "@/components/admin/AdminSidebar";
 import StatsCards from "@/components/admin/StatsCards";
 import ScheduleTimeline from "@/components/admin/ScheduleTimeline";
 import AppointmentTable from "@/components/admin/AppointmentTable";
+import LoginLogsTable from "@/components/admin/LoginLogsTable";
 import { LayoutDashboard, Users, CalendarDays, Settings } from "lucide-react";
 
 const adminLinks = [
