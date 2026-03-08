@@ -33,6 +33,7 @@ const App = () => (
           <Route path="/staff" element={<StaffDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <FloatingChat />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
