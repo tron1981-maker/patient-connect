@@ -34,6 +34,11 @@ const AdminDashboard = () => {
             <h2 className="mb-3 font-display text-lg font-bold text-foreground">예약 명단</h2>
             <AppointmentTable />
           </div>
+
+          <div>
+            <h2 className="mb-3 font-display text-lg font-bold text-foreground">로그인 기록</h2>
+            <LoginLogsTable />
+          </div>
         </div>
       </main>
     </div>
