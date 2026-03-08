@@ -2,8 +2,9 @@ import PatientHeader from "@/components/PatientHeader";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { CalendarDays, Clock, Shield, Smartphone } from "lucide-react";
+import { CalendarDays, Clock, Shield, Smartphone, Building2, Clock3, History, User, Car } from "lucide-react";
 import hospitalHero from "@/assets/hospital-hero.jpg";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const features = [
   { icon: CalendarDays, title: "실시간 스케줄", desc: "의사별 실시간 진료 일정을 확인하세요" },
