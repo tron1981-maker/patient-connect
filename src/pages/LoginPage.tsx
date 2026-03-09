@@ -39,6 +39,8 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [seeding, setSeeding] = useState(false);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirectTo = searchParams.get("redirect");
 
   const handleLogin = async (loginEmail: string, loginPassword: string) => {
     setLoading(true);
