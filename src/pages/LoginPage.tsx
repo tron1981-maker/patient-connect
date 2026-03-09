@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -39,6 +39,8 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [seeding, setSeeding] = useState(false);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirectTo = searchParams.get("redirect");
 
   const handleLogin = async (loginEmail: string, loginPassword: string) => {
     setLoading(true);
@@ -74,6 +76,12 @@ const LoginPage = () => {
       }
 
       toast.success("로그인 성공!");
+
+      // If there's a redirect URL (e.g. from booking), go there
+      if (redirectTo) {
+        navigate(redirectTo + (searchParams.get("restore") ? "?restore=true" : ""));
+        return;
+      }
 
       // Route based on role
       const role = profile?.role_label;

@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import PatientHeader from "@/components/PatientHeader";
 import DepartmentSelector from "@/components/booking/DepartmentSelector";
 import DoctorSelector from "@/components/booking/DoctorSelector";
 import BookingCalendar from "@/components/booking/BookingCalendar";
 import TimeSlotPicker from "@/components/booking/TimeSlotPicker";
 import BookingConfirm from "@/components/booking/BookingConfirm";
-import { Doctor, departments } from "@/lib/mockData";
+import { Doctor, departments, doctors } from "@/lib/mockData";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const steps = ["진료과", "의사", "날짜", "시간", "확인"];
 
@@ -16,6 +18,35 @@ const BookingPage = () => {
   const [doctor, setDoctor] = useState<Doctor | null>(null);
   const [date, setDate] = useState<Date | null>(null);
   const [time, setTime] = useState<string | null>(null);
+  const [searchParams] = useSearchParams();
+  const { toast } = useToast();
+
+  // Restore pending booking after login redirect
+  useEffect(() => {
+    if (searchParams.get("restore") === "true") {
+      const saved = sessionStorage.getItem("pendingBooking");
+      if (saved) {
+        try {
+          const booking = JSON.parse(saved);
+          // Find matching department
+          const dept = departments.find(d => d.name === booking.department);
+          if (dept) setDepartment(dept.id);
+          // Find matching doctor
+          const doc = doctors.find(d => d.name === booking.doctorName);
+          if (doc) setDoctor(doc);
+          if (booking.date) setDate(new Date(booking.date));
+          if (booking.time) setTime(booking.time);
+          sessionStorage.removeItem("pendingBooking");
+          toast({
+            title: "예약 정보가 복원되었습니다",
+            description: "예약 확정 버튼을 눌러 완료해 주세요.",
+          });
+        } catch {
+          sessionStorage.removeItem("pendingBooking");
+        }
+      }
+    }
+  }, [searchParams]);
 
   const currentStep = !department ? 0 : !doctor ? 1 : !date ? 2 : !time ? 3 : 4;
 
