@@ -77,6 +77,12 @@ const LoginPage = () => {
 
       toast.success("로그인 성공!");
 
+      // If there's a redirect URL (e.g. from booking), go there
+      if (redirectTo) {
+        navigate(redirectTo + (searchParams.get("restore") ? "?restore=true" : ""));
+        return;
+      }
+
       // Route based on role
       const role = profile?.role_label;
       if (role === "super_admin" || role === "sub_admin") {

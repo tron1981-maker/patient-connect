@@ -4,9 +4,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { CalendarDays, Clock, User, CheckCircle } from "lucide-react";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
 interface BookingConfirmProps {
   doctorName: string;
@@ -25,7 +26,26 @@ const BookingConfirm = ({ doctorName, department, date, time }: BookingConfirmPr
   const endMin = parseInt(time.split(":")[1]) + 30;
   const endTime = `${endMin >= 60 ? endHour + 1 : endHour}:${(endMin % 60).toString().padStart(2, "0")}`;
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
+    // Check if user is logged in
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      // Save booking state to sessionStorage
+      sessionStorage.setItem("pendingBooking", JSON.stringify({
+        doctorName,
+        department,
+        date: date.toISOString(),
+        time,
+        memo,
+      }));
+      toast({
+        title: "로그인이 필요합니다",
+        description: "예약을 완료하려면 먼저 로그인해 주세요.",
+      });
+      navigate("/login?redirect=/booking&restore=true");
+      return;
+    }
+
     setConfirmed(true);
     toast({
       title: "예약이 완료되었습니다! ✅",
